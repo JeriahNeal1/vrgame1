@@ -1,0 +1,20 @@
+{
+    "name": "VRGame.Manifestation.Editor",
+    "rootNamespace": "VRGame.Manifestation.Editor",
+    "references": [
+        "VRGame.Items",
+        "VRGame.Runtime",
+        "VRGame.Integration.HurricaneVR"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

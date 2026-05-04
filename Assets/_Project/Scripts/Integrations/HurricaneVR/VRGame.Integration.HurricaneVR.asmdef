@@ -1,0 +1,17 @@
+{
+    "name": "VRGame.Integration.HurricaneVR",
+    "rootNamespace": "VRGame.Integration.HurricaneVR",
+    "references": [
+        "VRGame.Items",
+        "VRGame.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

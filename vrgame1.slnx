@@ -1,4 +1,13 @@
 ﻿<Solution>
-  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="HurricaneVR.Editor.csproj" />
+  <Project Path="VRGame.Runtime.csproj" />
+  <Project Path="VRGame.Items.csproj" />
+  <Project Path="HurricaneVR.Framework.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="VRGame.Items.Editor.csproj" />
+  <Project Path="VRGame.Manifestation.Editor.csproj" />
+  <Project Path="Polyperfect.Common.csproj" />
+  <Project Path="Polyperfect.Universal.csproj" />
+  <Project Path="VRGame.Integration.HurricaneVR.csproj" />
 </Solution>
