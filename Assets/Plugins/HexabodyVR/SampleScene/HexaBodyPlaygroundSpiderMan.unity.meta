@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0956886dbceeb1a43b7ba4b6c93c70bf
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/HexaBodyPlaygroundSpiderMan.unity
+  uploadId: 830824

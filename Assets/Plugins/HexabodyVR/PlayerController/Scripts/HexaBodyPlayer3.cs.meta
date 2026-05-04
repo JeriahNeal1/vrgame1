@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 57eef37c88de8e74086c36b95c7ed620
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/Scripts/HexaBodyPlayer3.cs
+  uploadId: 830824

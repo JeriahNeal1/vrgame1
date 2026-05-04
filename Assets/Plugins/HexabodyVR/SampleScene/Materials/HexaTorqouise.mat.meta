@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f0f3087019d68da40b342cdb427f381f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Materials/HexaTorqouise.mat
+  uploadId: 830824

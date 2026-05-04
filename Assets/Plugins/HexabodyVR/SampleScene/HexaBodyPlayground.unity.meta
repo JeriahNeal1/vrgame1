@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7e42bb4ab0a7cd34bab0343e3e3ea314
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/HexaBodyPlayground.unity
+  uploadId: 830824

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b7277f2dca1e22a42a7f4a7331e5a564
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Technie/New Game Object Hull Data.asset
+  uploadId: 830824

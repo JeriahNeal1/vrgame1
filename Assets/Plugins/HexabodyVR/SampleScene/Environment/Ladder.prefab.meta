@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9771a726b23f39244a39ecf27eb9c801
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Environment/Ladder.prefab
+  uploadId: 830824

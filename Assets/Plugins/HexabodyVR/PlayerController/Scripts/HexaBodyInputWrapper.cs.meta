@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1de141f6b621dc744b6c987d9282d76b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/Scripts/HexaBodyInputWrapper.cs
+  uploadId: 830824

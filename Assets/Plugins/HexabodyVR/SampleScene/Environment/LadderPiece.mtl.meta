@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e1ee7452db66d284e83f59fca7dfcdea
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Environment/LadderPiece.mtl
+  uploadId: 830824

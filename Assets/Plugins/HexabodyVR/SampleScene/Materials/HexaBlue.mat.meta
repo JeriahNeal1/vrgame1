@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f9324c4a93676ca4bbcb18a7caa4d046
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Materials/HexaBlue.mat
+  uploadId: 830824

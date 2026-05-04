@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bc635307d18f6dd439cd8cbb9c63487b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Environment/Box2_3_2.prefab
+  uploadId: 830824

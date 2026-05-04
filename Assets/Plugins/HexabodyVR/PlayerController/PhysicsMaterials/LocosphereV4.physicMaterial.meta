@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c0ac2f5f81ce5354aa918ac2891b7dfa
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/PhysicsMaterials/LocosphereV4.physicMaterial
+  uploadId: 830824

@@ -126,6 +126,11 @@ namespace VRGame.Items
                 issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Manifestable items should reference a world prefab."));
             }
 
+            if (itemDefinition.WorldPrefab != null && itemDefinition.GeneratedIcon == null)
+            {
+                issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Item has a world prefab but no generated inventory icon."));
+            }
+
             if (itemDefinition.HasFlag(ItemFlags.CanBeEquipped) && !itemDefinition.HasEquipmentProfile)
             {
                 issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Equippable items should enable an equipment profile with slot compatibility."));

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: e113121b2b8e474090cc14b9b27791e9
+timeCreated: 1637248365
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/Scripts/CircularBuffer.cs
+  uploadId: 830824

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 93e4dd394f0b8fc4fb6b723c32618175
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/Prefabs/HexaBodyPlayerV2.prefab
+  uploadId: 830824

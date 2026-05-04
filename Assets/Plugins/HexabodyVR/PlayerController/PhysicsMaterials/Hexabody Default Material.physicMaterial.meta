@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7547201ce34cc924aa4686afd3450cf8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 13400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/PhysicsMaterials/Hexabody
+    Default Material.physicMaterial
+  uploadId: 830824

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7dc173283f964a54283340177068b525
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Environment/Floor10x10.prefab
+  uploadId: 830824

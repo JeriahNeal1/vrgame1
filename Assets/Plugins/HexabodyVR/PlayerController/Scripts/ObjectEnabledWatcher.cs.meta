@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 1374c6550219468ebc44ac641a954613
+timeCreated: 1635308982
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/Scripts/ObjectEnabledWatcher.cs
+  uploadId: 830824

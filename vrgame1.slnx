@@ -6,8 +6,10 @@
   <Project Path="HurricaneVR.Framework.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="VRGame.Items.Editor.csproj" />
+  <Project Path="Assembly-CSharp-firstpass.csproj" />
   <Project Path="VRGame.Manifestation.Editor.csproj" />
   <Project Path="Polyperfect.Common.csproj" />
   <Project Path="Polyperfect.Universal.csproj" />
   <Project Path="VRGame.Integration.HurricaneVR.csproj" />
+  <Project Path="Assembly-CSharp-Editor-firstpass.csproj" />
 </Solution>

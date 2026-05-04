@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f249ff710cff6b54fa26af7cf1f47e54
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/PhysicsMaterials/Slippery.physicMaterial
+  uploadId: 830824

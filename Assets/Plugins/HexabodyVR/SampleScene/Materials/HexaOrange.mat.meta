@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0535d9ee704a3d24fb69d566e3c7f1c4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Materials/HexaOrange.mat
+  uploadId: 830824

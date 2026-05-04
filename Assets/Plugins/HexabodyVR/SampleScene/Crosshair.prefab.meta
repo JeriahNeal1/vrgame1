@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 13362a5aeb906474492450e5e2ea9b06
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/Crosshair.prefab
+  uploadId: 830824

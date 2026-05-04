@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ae938eb177b3fb44494c51045274cd8a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/SampleScene/HexaBodyPlayground/LightingData.asset
+  uploadId: 830824

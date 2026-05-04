@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 3fc39302099042e8a46ffbf612c5e99d
+timeCreated: 1607556985
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/PlayerController/Scripts/HexaCameraRig.cs
+  uploadId: 830824

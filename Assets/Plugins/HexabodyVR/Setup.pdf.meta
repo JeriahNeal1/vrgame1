@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d6174bf2dd7cce44a9fcd4eac36c3500
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185521
+  packageName: VR Physics Player Controller
+  packageVersion: 1.44a
+  assetPath: Assets/Plugins/HexabodyVR/Setup.pdf
+  uploadId: 830824

@@ -14,6 +14,12 @@ namespace VRGame.Items.Editor
             ItemDefinition itemDefinition = (ItemDefinition)target;
             List<ItemDefinitionValidationIssue> issues = ItemDefinitionValidator.Validate(itemDefinition);
             ItemDefinitionEditorUtility.DrawValidationIssues(issues);
+
+            EditorGUILayout.Space();
+            if (GUILayout.Button("Open Icon Generator"))
+            {
+                ItemIconGeneratorWindow.OpenForItem(itemDefinition);
+            }
         }
     }
 
