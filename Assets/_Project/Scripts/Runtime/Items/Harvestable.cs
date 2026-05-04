@@ -222,6 +222,11 @@ namespace VRGame.Runtime
             }
 
             IReadOnlyList<HarvestDropEntry> drops = Profile.SimpleDrops;
+            if (!ValidateDropsBeforeMutation(inventoryState, drops, out string dropValidationMessage))
+            {
+                return new HarvestHitResult(false, false, validation, dropValidationMessage, System.Array.Empty<InventoryOperationResult>());
+            }
+
             bool addedAnyDrop = false;
             for (int i = 0; i < drops.Count; i++)
             {
@@ -245,6 +250,56 @@ namespace VRGame.Runtime
                 ? "Harvest complete; simple drops were added to inventory."
                 : "Harvest complete; no simple drops were configured.";
             return new HarvestHitResult(true, true, validation, message, reusableDropResults.ToArray());
+        }
+
+        private bool ValidateDropsBeforeMutation(PlayerInventoryState inventoryState, IReadOnlyList<HarvestDropEntry> drops, out string message)
+        {
+            Dictionary<string, StackQuantity> projectedQuantities = new Dictionary<string, StackQuantity>(StableIdUtility.Comparer);
+            if (drops == null)
+            {
+                message = "Harvest drop list is empty.";
+                return true;
+            }
+
+            for (int i = 0; i < drops.Count; i++)
+            {
+                HarvestDropEntry drop = drops[i];
+                if (drop == null || !drop.IsValid)
+                {
+                    continue;
+                }
+
+                if (!itemDefinitionDatabase.TryGet(drop.ItemDefId, out ItemDefinition dropDefinition) || dropDefinition == null)
+                {
+                    message = $"Harvest drop item definition '{drop.ItemDefId}' is missing.";
+                    return false;
+                }
+
+                if (!dropDefinition.ResolvedStackPolicy.IsStackable)
+                {
+                    message = $"Harvest drop item definition '{drop.ItemDefId}' is unstackable and cannot be granted through the stack ledger.";
+                    return false;
+                }
+
+                string key = drop.ItemDefId.Value;
+                if (!projectedQuantities.TryGetValue(key, out StackQuantity projectedQuantity))
+                {
+                    projectedQuantity = inventoryState.TryGetStack(drop.ItemDefId, out InventoryStackRecord existingStack)
+                        ? existingStack.Quantity
+                        : StackQuantity.Zero;
+                }
+
+                if (!projectedQuantity.TryAdd(drop.Quantity, out StackQuantity newProjectedQuantity))
+                {
+                    message = $"Harvest drops for '{drop.ItemDefId}' would exceed the practical stack quantity limit.";
+                    return false;
+                }
+
+                projectedQuantities[key] = newProjectedQuantity;
+            }
+
+            message = "Harvest drops can be added.";
+            return true;
         }
 
         private HarvestHitResult Fail(HarvestToolValidationResult validation)

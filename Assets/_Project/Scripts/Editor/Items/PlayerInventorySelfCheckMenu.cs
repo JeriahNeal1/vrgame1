@@ -140,6 +140,18 @@ namespace VRGame.Items.Editor
             string missingRingSlotId = EquipmentSlotIdUtility.GetGeneratedRingSlotId(1);
 
             failures += ExpectSuccess(
+                "Create dropped ring instance",
+                PlayerInventoryOperations.CreateItemInstance(inventoryState, database, ItemDefId.FromString("equipment.accessory.copper_ring"), ItemInstanceId.FromString("test_dropped_ring_instance"), out ItemInstanceId droppedRingInstanceId));
+
+            failures += ExpectSuccess(
+                "Move dropped ring instance to DroppedInWorld",
+                PlayerInventoryOperations.MoveInstanceToState(inventoryState, droppedRingInstanceId, ItemLifecycleState.DroppedInWorld));
+
+            failures += ExpectFailure(
+                "Cannot equip dropped equipment without held manifestation",
+                EquipmentService.CanEquip(inventoryState, database, loadoutConfig, droppedRingInstanceId, ringSlotId));
+
+            failures += ExpectSuccess(
                 "Can equip helmet into Head",
                 EquipmentService.CanEquip(inventoryState, database, loadoutConfig, helmetInstanceId, headSlotId));
 

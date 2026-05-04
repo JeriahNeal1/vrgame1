@@ -121,6 +121,32 @@ namespace VRGame.Items
                 issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Only equipment can have modifier or enchantment pools."));
             }
 
+            if (itemDefinition.HasFlag(ItemFlags.Placeable))
+            {
+                if (!itemDefinition.HasPlaceableProfile || itemDefinition.PlaceableProfile == null)
+                {
+                    issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Placeable items should enable a placeable profile."));
+                }
+                else
+                {
+                    PlaceableProfile placeableProfile = itemDefinition.PlaceableProfile;
+                    if (!itemDefinition.ResolvedStackPolicy.IsStackable)
+                    {
+                        issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Placeable items should remain stackable inventory resources unless explicitly designed otherwise."));
+                    }
+
+                    if (placeableProfile.PlacementMode != PlacementMode.Wire && placeableProfile.PlacedPrefab == null)
+                    {
+                        issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Placeable item profile should reference a placed world prefab."));
+                    }
+
+                    if (placeableProfile.PlacementMode == PlacementMode.FrameworkSnap && placeableProfile.FrameworkPieceKind == FrameworkPieceKind.None)
+                    {
+                        issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Framework snap placeables should specify a framework piece kind."));
+                    }
+                }
+            }
+
             if (itemDefinition.IsManifestable && itemDefinition.WorldPrefab == null)
             {
                 issues.Add(new ItemDefinitionValidationIssue(ItemDefinitionValidationSeverity.Warning, itemDefinition, "Manifestable items should reference a world prefab."));

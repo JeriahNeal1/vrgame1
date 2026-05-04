@@ -250,7 +250,11 @@ namespace VRGame.Runtime
                 InventoryOperationResult commitResult = manifestationService.CommitManifestedItemAsEquipped(inventoryState, requestId);
                 if (!commitResult.Success)
                 {
-                    Debug.LogWarning($"Equipped item but failed to commit manifestation '{requestId}': {commitResult.Message}", this);
+                    EquipmentService.Unequip(inventoryState, equipmentLoadoutConfig, slotId, out _);
+                    PlayerInventoryOperations.MoveInstanceToState(inventoryState, identity.ItemInstanceId, ItemLifecycleState.HeldInWorld);
+                    RefreshAll();
+                    Debug.LogWarning($"Rolled back equip because manifestation '{requestId}' could not be committed: {commitResult.Message}", this);
+                    return commitResult;
                 }
             }
             else

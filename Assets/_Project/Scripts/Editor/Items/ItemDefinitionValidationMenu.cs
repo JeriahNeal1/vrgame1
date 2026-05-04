@@ -22,6 +22,11 @@ namespace VRGame.Items.Editor
                 }
 
                 issueCount += LogIssues(database.ValidateDefinitions());
+                IReadOnlyList<ItemDefinition> definitions = database.ItemDefinitions;
+                for (int definitionIndex = 0; definitionIndex < definitions.Count; definitionIndex++)
+                {
+                    issueCount += ItemDefinitionEditorUtility.LogAssetReferenceIssues(definitions[definitionIndex]);
+                }
             }
 
             if (databaseGuids.Length == 0)
@@ -37,6 +42,7 @@ namespace VRGame.Items.Editor
                     }
 
                     issueCount += LogIssues(ItemDefinitionValidator.Validate(itemDefinition));
+                    issueCount += ItemDefinitionEditorUtility.LogAssetReferenceIssues(itemDefinition);
                 }
             }
 

@@ -321,6 +321,11 @@ namespace VRGame.Items
                 return InventoryOperationResult.Failed(operationType, InventoryFailureReason.ItemNotEquippable, $"Item instance '{itemInstanceId}' is in state '{itemInstance.LifecycleState}' and cannot be equipped.", inventoryState.Revision);
             }
 
+            if (!CanEquipFromLifecycle(itemInstance.LifecycleState))
+            {
+                return InventoryOperationResult.Failed(operationType, InventoryFailureReason.ItemNotEquippable, $"Item instance '{itemInstanceId}' must be in inventory, held, or already equipped before it can be equipped. Current state: '{itemInstance.LifecycleState}'.", inventoryState.Revision);
+            }
+
             if (FindSlotContainingInstance(inventoryState.EquipmentLoadout, itemInstanceId, out string existingSlotId) &&
                 !StableIdUtility.EqualsNormalized(existingSlotId, slot.SlotId) &&
                 !allowAlreadyEquippedInAnotherSlot)
@@ -436,6 +441,13 @@ namespace VRGame.Items
             }
 
             return false;
+        }
+
+        private static bool CanEquipFromLifecycle(ItemLifecycleState lifecycleState)
+        {
+            return lifecycleState == ItemLifecycleState.InInventory ||
+                   lifecycleState == ItemLifecycleState.HeldInWorld ||
+                   lifecycleState == ItemLifecycleState.Equipped;
         }
 
         private static int ParseGeneratedRingIndex(string slotId)

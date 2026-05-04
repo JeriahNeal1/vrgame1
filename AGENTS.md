@@ -119,6 +119,8 @@ Design inventory changes as commands validated by an authority, even while the f
 - Do not trust client-side physical objects as ownership proof.
 - Avoid storing scene object IDs as item ownership. Use stable item instance IDs and explicit world spawn records.
 - Keep deterministic stat aggregation and modifier rolls reproducible from serializable records plus authored definitions.
+- Multi-step inventory/world actions such as manifestation, equip-from-world, placement, harvesting drops, and wire creation must preflight validation before mutation where practical and must roll back inventory/world side effects on failure.
+- Runtime-only Unity bindings such as `WorldItemView.BoundDefinition` may cache resolved definitions for the current session, but these caches must stay nonserialized and must never become save/network state.
 
 ## Hurricane VR Integration Boundary
 
@@ -129,6 +131,7 @@ Hurricane VR is the physical interaction layer, not the source of truth for inve
 - Use adapter/facade interfaces for core-to-VR operations, for example `IItemManifestationService`, `IWorldItemAdapter`, `IHandItemSpawnService`, or `IEquipmentSlotDropTarget`.
 - Physical item prefabs should be Hurricane-compatible: Rigidbody, colliders, `HVRGrabbable`, grip points/hand poses where needed, and optional socket metadata.
 - The item definition references the physical prefab for spawning and editor icon generation, but save data stores only the item definition ID and item instance value records.
+- Authored item definition prefab references must point to persistent prefab/model assets, not scene instances. Scene objects belong in runtime adapters, previews, or placed-world records.
 
 ## Equipment Slots
 
