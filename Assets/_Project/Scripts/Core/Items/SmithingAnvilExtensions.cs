@@ -40,6 +40,33 @@ namespace VRGame.Items
         [SerializeField]
         private int randomSeed = 0;
 
+        public SmithingStrikeRecord()
+        {
+        }
+
+        public SmithingStrikeRecord(
+            ItemInstanceId targetItemInstanceId,
+            ItemInstanceId hammerItemInstanceId,
+            ItemDefId hammerItemDefId,
+            string stationId,
+            float normalizedForce,
+            float timingQuality,
+            float contactQuality,
+            int sequenceIndex,
+            int randomSeed)
+        {
+            this.targetItemInstanceId = targetItemInstanceId;
+            this.hammerItemInstanceId = hammerItemInstanceId;
+            this.hammerItemDefId = hammerItemDefId;
+            this.stationId = StableIdUtility.Normalize(stationId);
+            this.normalizedForce = Mathf.Clamp01(normalizedForce);
+            this.timingQuality = Mathf.Clamp01(timingQuality);
+            this.contactQuality = Mathf.Clamp01(contactQuality);
+            overallQuality = Mathf.Clamp01((this.normalizedForce + this.timingQuality + this.contactQuality) / 3f);
+            this.sequenceIndex = Mathf.Max(0, sequenceIndex);
+            this.randomSeed = randomSeed;
+        }
+
         public ItemInstanceId TargetItemInstanceId
         {
             get { return targetItemInstanceId; }

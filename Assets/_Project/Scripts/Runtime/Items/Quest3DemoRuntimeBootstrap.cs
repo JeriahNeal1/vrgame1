@@ -106,6 +106,8 @@ namespace VRGame.Runtime
                     harvestables[i].BindRuntime(itemDefinitionDatabase, affixDefinitionDatabase, provider);
                 }
             }
+
+            BindRuntimeSmithingStations(provider);
         }
 
         public void SeedOnce()
@@ -207,6 +209,8 @@ namespace VRGame.Runtime
                     harvestZones[zoneIndex]?.BindRuntime(worldItemView, itemDefinitionDatabase, affixDefinitionDatabase, provider);
                 }
             }
+
+            BindRuntimeSmithingStations(provider);
         }
 
         public void SelectDemoStack(string itemDefId)
@@ -255,6 +259,15 @@ namespace VRGame.Runtime
                     seed.EnchantmentLevel,
                     seed.RollSeed);
                 LogResult($"Apply enchantment {seed.EnchantmentId} to {seed.ItemInstanceId}", enchantmentResult);
+            }
+        }
+
+        private void BindRuntimeSmithingStations(IPlayerInventoryStateProvider provider)
+        {
+            SmithingStation[] smithingStations = FindObjectsByType<SmithingStation>(FindObjectsInactive.Include);
+            for (int i = 0; i < smithingStations.Length; i++)
+            {
+                smithingStations[i]?.BindRuntime(itemDefinitionDatabase, affixDefinitionDatabase, provider);
             }
         }
 

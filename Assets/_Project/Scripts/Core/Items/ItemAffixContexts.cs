@@ -51,6 +51,30 @@ namespace VRGame.Items
             this.randomSeed = randomSeed;
         }
 
+        public ReforgeContext(
+            ReforgeSourceType sourceType,
+            int skillLevel,
+            string stationId,
+            ItemDefId toolUsedId,
+            IReadOnlyList<ItemDefId> consumedMaterialIds,
+            int randomSeed,
+            float qualityBonus,
+            IReadOnlyList<DefinitionIdReference> allowedModifierPoolOverride)
+        {
+            this.sourceType = sourceType;
+            this.skillLevel = Mathf.Max(0, skillLevel);
+            this.stationId = StableIdUtility.Normalize(stationId);
+            this.toolUsedId = toolUsedId;
+            this.randomSeed = randomSeed;
+            this.qualityBonus = Mathf.Max(0f, qualityBonus);
+            this.consumedMaterialIds = consumedMaterialIds != null
+                ? new List<ItemDefId>(consumedMaterialIds)
+                : new List<ItemDefId>();
+            this.allowedModifierPoolOverride = allowedModifierPoolOverride != null
+                ? new List<DefinitionIdReference>(allowedModifierPoolOverride)
+                : new List<DefinitionIdReference>();
+        }
+
         public ReforgeSourceType SourceType
         {
             get { return sourceType; }
@@ -157,6 +181,26 @@ namespace VRGame.Items
             this.gemItemId = gemItemId;
             this.targetItemInstanceId = targetItemInstanceId;
             this.randomSeed = randomSeed;
+        }
+
+        public GemEnchantmentContext(
+            ItemDefId gemItemId,
+            ItemInstanceId targetItemInstanceId,
+            IReadOnlyList<DefinitionIdReference> enchantmentPool,
+            float skillBonus,
+            float stationBonus,
+            int randomSeed,
+            GemEnchantmentApplyBehavior behavior)
+        {
+            this.gemItemId = gemItemId;
+            this.targetItemInstanceId = targetItemInstanceId;
+            this.enchantmentPool = enchantmentPool != null
+                ? new List<DefinitionIdReference>(enchantmentPool)
+                : new List<DefinitionIdReference>();
+            this.skillBonus = Mathf.Max(0f, skillBonus);
+            this.stationBonus = Mathf.Max(0f, stationBonus);
+            this.randomSeed = randomSeed;
+            this.behavior = behavior;
         }
 
         public ItemDefId GemItemId

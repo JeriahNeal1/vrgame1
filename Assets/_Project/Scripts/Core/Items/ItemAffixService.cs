@@ -319,38 +319,18 @@ namespace VRGame.Items
             out EnchantmentId appliedEnchantmentId)
         {
             appliedEnchantmentId = default;
-            if (gemContext == null)
-            {
-                return InventoryOperationResult.Failed(
-                    InventoryOperationType.ApplyGemEnchantment,
-                    InventoryFailureReason.EnchantmentNotApplied,
-                    "Gem enchantment context is null.");
-            }
-
-            InventoryOperationResult targetValidation = ValidateAffixTarget(
-                InventoryOperationType.ApplyGemEnchantment,
+            InventoryOperationResult candidateValidation = ValidateGemEnchantmentCandidates(
                 inventoryState,
                 itemDefinitionDatabase,
                 affixDefinitionDatabase,
-                gemContext.TargetItemInstanceId,
+                gemContext,
                 out ItemInstanceState itemInstance,
-                out ItemDefinition itemDefinition);
+                out ItemDefinition itemDefinition,
+                out List<EnchantmentDefinition> candidates);
 
-            if (!targetValidation.Success)
+            if (!candidateValidation.Success)
             {
-                return targetValidation;
-            }
-
-            List<EnchantmentDefinition> candidates = CollectEnchantmentCandidates(affixDefinitionDatabase, itemDefinition, gemContext);
-            RemoveInvalidEnchantmentCandidates(candidates, itemDefinition, itemInstance, affixDefinitionDatabase, gemContext.Behavior);
-
-            if (candidates.Count == 0)
-            {
-                return InventoryOperationResult.Failed(
-                    InventoryOperationType.ApplyGemEnchantment,
-                    InventoryFailureReason.NoValidEnchantmentCandidates,
-                    $"No valid enchantment candidates were found for gem '{gemContext.GemItemId}' and item '{itemDefinition.ItemDefId}'.",
-                    inventoryState.Revision);
+                return candidateValidation;
             }
 
             int seed = ResolveSeed(gemContext.RandomSeed, inventoryState, gemContext.TargetItemInstanceId);
@@ -402,6 +382,82 @@ namespace VRGame.Items
                 selected.EnchantmentId,
                 1,
                 seed);
+        }
+
+        public static InventoryOperationResult CanApplyGemEnchantment(
+            PlayerInventoryState inventoryState,
+            ItemDefinitionDatabase itemDefinitionDatabase,
+            ItemAffixDefinitionDatabase affixDefinitionDatabase,
+            GemEnchantmentContext gemContext)
+        {
+            InventoryOperationResult candidateValidation = ValidateGemEnchantmentCandidates(
+                inventoryState,
+                itemDefinitionDatabase,
+                affixDefinitionDatabase,
+                gemContext,
+                out _,
+                out ItemDefinition itemDefinition,
+                out List<EnchantmentDefinition> candidates);
+
+            if (!candidateValidation.Success)
+            {
+                return candidateValidation;
+            }
+
+            return InventoryOperationResult
+                .Succeeded(InventoryOperationType.ApplyGemEnchantment, inventoryState.Revision, $"Gem '{gemContext.GemItemId}' can apply one of {candidates.Count} enchantment candidate(s) to '{itemDefinition.ItemDefId}'.")
+                .WithChangedItemDefinition(itemDefinition.ItemDefId)
+                .WithChangedItemInstance(gemContext.TargetItemInstanceId);
+        }
+
+        private static InventoryOperationResult ValidateGemEnchantmentCandidates(
+            PlayerInventoryState inventoryState,
+            ItemDefinitionDatabase itemDefinitionDatabase,
+            ItemAffixDefinitionDatabase affixDefinitionDatabase,
+            GemEnchantmentContext gemContext,
+            out ItemInstanceState itemInstance,
+            out ItemDefinition itemDefinition,
+            out List<EnchantmentDefinition> candidates)
+        {
+            itemInstance = null;
+            itemDefinition = null;
+            candidates = null;
+
+            if (gemContext == null)
+            {
+                return InventoryOperationResult.Failed(
+                    InventoryOperationType.ApplyGemEnchantment,
+                    InventoryFailureReason.EnchantmentNotApplied,
+                    "Gem enchantment context is null.");
+            }
+
+            InventoryOperationResult targetValidation = ValidateAffixTarget(
+                InventoryOperationType.ApplyGemEnchantment,
+                inventoryState,
+                itemDefinitionDatabase,
+                affixDefinitionDatabase,
+                gemContext.TargetItemInstanceId,
+                out itemInstance,
+                out itemDefinition);
+
+            if (!targetValidation.Success)
+            {
+                return targetValidation;
+            }
+
+            candidates = CollectEnchantmentCandidates(affixDefinitionDatabase, itemDefinition, gemContext);
+            RemoveInvalidEnchantmentCandidates(candidates, itemDefinition, itemInstance, affixDefinitionDatabase, gemContext.Behavior);
+
+            if (candidates.Count == 0)
+            {
+                return InventoryOperationResult.Failed(
+                    InventoryOperationType.ApplyGemEnchantment,
+                    InventoryFailureReason.NoValidEnchantmentCandidates,
+                    $"No valid enchantment candidates were found for gem '{gemContext.GemItemId}' and item '{itemDefinition.ItemDefId}'.",
+                    inventoryState.Revision);
+            }
+
+            return InventoryOperationResult.Succeeded(InventoryOperationType.ApplyGemEnchantment, inventoryState.Revision);
         }
 
         private static InventoryOperationResult ValidateModifierRequest(

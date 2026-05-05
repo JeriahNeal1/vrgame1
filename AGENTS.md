@@ -78,6 +78,9 @@ Inventory and item work must follow these rules:
 - Only equipment can have modifiers and enchantments.
 - Modifiers are rerollable like Terraria reforging.
 - Modifier and enchantment application must remain data-driven. Do not hard-code a single reforging path into item instances.
+- Smithing/forging must remain an extension over modifier services: stations build `ReforgeContext` data and call the shared modifier service rather than mutating item records directly.
+- Gem enchantment insertion uses stackable non-equipment gem items plus `GemEnchantmentProfileDefinition` assets that map gem item IDs to enchantment pools. Do not put modifier/enchantment ownership data onto gem item instances.
+- A manifested stack gem has already been reserved/removed from the stack ledger by the manifestation service. If a world gem is inserted successfully, destroy/commit the world object and do not remove the stack a second time.
 - Every item, resource, placeable, and equipment definition should reference a physical prefab for world manifestation and inventory icon generation.
 - Runtime player inventory/save/network state must store IDs and serializable value records, not direct `ScriptableObject`, prefab, GameObject, `MonoBehaviour`, or Hurricane VR references.
 

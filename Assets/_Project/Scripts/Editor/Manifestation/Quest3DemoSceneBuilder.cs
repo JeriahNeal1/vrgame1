@@ -27,9 +27,12 @@ namespace VRGame.Manifestation.Editor
         private static readonly ItemDefId StoneId = ItemDefId.FromString("demo.resource.stone");
         private static readonly ItemDefId CopperOreId = ItemDefId.FromString("demo.resource.copper_ore");
         private static readonly ItemDefId FishId = ItemDefId.FromString("demo.resource.fish");
+        private static readonly ItemDefId RubyGemId = ItemDefId.FromString("demo.resource.ruby_gem");
+        private static readonly ItemDefId SapphireGemId = ItemDefId.FromString("demo.resource.sapphire_gem");
         private static readonly ItemDefId CopperPickaxeId = ItemDefId.FromString("demo.tool.copper_pickaxe");
         private static readonly ItemDefId CopperAxeId = ItemDefId.FromString("demo.tool.copper_axe");
         private static readonly ItemDefId FishingTrapId = ItemDefId.FromString("demo.tool.fishing_trap");
+        private static readonly ItemDefId SmithingHammerId = ItemDefId.FromString("demo.tool.smithing_hammer");
         private static readonly ItemDefId CopperSwordId = ItemDefId.FromString("demo.weapon.copper_sword");
         private static readonly ItemDefId CopperHelmetId = ItemDefId.FromString("demo.armor.copper_helmet");
         private static readonly ItemDefId RubyRingId = ItemDefId.FromString("demo.accessory.ruby_ring");
@@ -40,10 +43,16 @@ namespace VRGame.Manifestation.Editor
         private static readonly ItemDefId SwitchId = ItemDefId.FromString("demo.electrical.switch");
         private static readonly ItemDefId DiodeId = ItemDefId.FromString("demo.electrical.diode");
         private static readonly ItemDefId WireSpoolId = ItemDefId.FromString("demo.electrical.wire_spool");
+        private static readonly ItemDefId SmithingAnvilId = ItemDefId.FromString("demo.placeable.smithing_anvil");
 
         private static readonly ModifierId SturdyModifierId = ModifierId.FromString("demo.modifier.sturdy");
         private static readonly ModifierId HardenedModifierId = ModifierId.FromString("demo.modifier.hardened_i");
+        private static readonly ModifierId RefinedModifierId = ModifierId.FromString("demo.modifier.refined");
         private static readonly EnchantmentId EmberEnchantmentId = EnchantmentId.FromString("demo.enchantment.ember");
+        private static readonly EnchantmentId FrostEnchantmentId = EnchantmentId.FromString("demo.enchantment.frost");
+        private const string SmithingModifierSetId = "demo.modifier_set.smithing_basic";
+        private const string RubyEnchantmentSetId = "demo.enchantment_set.ruby_fire";
+        private const string SapphireEnchantmentSetId = "demo.enchantment_set.sapphire_frost";
 
         [MenuItem("Tools/VRGame/Scenes/Build Quest 3 Demo Scene")]
         public static void BuildQuest3DemoScene()
@@ -237,6 +246,7 @@ namespace VRGame.Manifestation.Editor
                 GrassMaterial = CreateMaterial("M_Grass", new Color(0.16f, 0.43f, 0.2f, 1f)),
                 MetalMaterial = CreateMaterial("M_Metal", new Color(0.38f, 0.43f, 0.48f, 1f)),
                 RubyMaterial = CreateMaterial("M_Ruby", new Color(0.75f, 0.05f, 0.18f, 1f)),
+                SapphireMaterial = CreateMaterial("M_Sapphire", new Color(0.08f, 0.28f, 0.9f, 1f)),
                 PortalMaterial = CreateMaterial("M_Portal", new Color(0.08f, 0.65f, 0.95f, 0.75f))
             };
 
@@ -244,9 +254,12 @@ namespace VRGame.Manifestation.Editor
             catalog.StonePhysicalPrefab = CreateWorldItemPrefab("P_StoneResource", PrimitiveType.Sphere, new Vector3(0.22f, 0.22f, 0.22f), catalog.StoneMaterial);
             catalog.CopperOrePhysicalPrefab = CreateWorldItemPrefab("P_CopperOreResource", PrimitiveType.Sphere, new Vector3(0.25f, 0.22f, 0.25f), catalog.CopperMaterial);
             catalog.FishPhysicalPrefab = CreateWorldItemPrefab("P_FishResource", PrimitiveType.Capsule, new Vector3(0.15f, 0.08f, 0.28f), catalog.PortalMaterial);
+            catalog.RubyGemPrefab = CreateWorldItemPrefab("P_RubyGem", PrimitiveType.Sphere, new Vector3(0.12f, 0.12f, 0.12f), catalog.RubyMaterial);
+            catalog.SapphireGemPrefab = CreateWorldItemPrefab("P_SapphireGem", PrimitiveType.Sphere, new Vector3(0.12f, 0.12f, 0.12f), catalog.SapphireMaterial);
             catalog.PickaxePrefab = CreateToolPrefab("P_CopperPickaxe", catalog.CopperMaterial, HarvestingDomain.Mining, HarvestingSubtype.Pickaxe);
             catalog.AxePrefab = CreateToolPrefab("P_CopperAxe", catalog.CopperMaterial, HarvestingDomain.Lumber, HarvestingSubtype.Axe);
             catalog.FishingTrapPrefab = CreateToolPrefab("P_FishingTrap", catalog.WoodMaterial, HarvestingDomain.Fishing, HarvestingSubtype.Trap);
+            catalog.SmithingHammerPrefab = CreateToolPrefab("P_SmithingHammer", catalog.MetalMaterial, HarvestingDomain.ConstructionArchitecture, HarvestingSubtype.Hammer);
             catalog.SwordPrefab = CreateSwordPrefab("P_CopperSword", catalog.CopperMaterial);
             catalog.HelmetPrefab = CreateWorldItemPrefab("P_CopperHelmet", PrimitiveType.Sphere, new Vector3(0.28f, 0.18f, 0.28f), catalog.CopperMaterial);
             catalog.RingPrefab = CreateWorldItemPrefab("P_RubyRing", PrimitiveType.Cylinder, new Vector3(0.18f, 0.04f, 0.18f), catalog.RubyMaterial);
@@ -257,6 +270,7 @@ namespace VRGame.Manifestation.Editor
             catalog.SwitchPlacedPrefab = CreateElectricalPlacedPrefab("P_SwitchPlaced", typeof(ElectricalSwitch), catalog.MetalMaterial);
             catalog.DiodePlacedPrefab = CreateElectricalPlacedPrefab("P_DiodePlaced", typeof(ElectricalDiode), catalog.MetalMaterial);
             catalog.WireSpoolPhysicalPrefab = CreateWorldItemPrefab("P_WireSpool", PrimitiveType.Cylinder, new Vector3(0.2f, 0.16f, 0.2f), catalog.MetalMaterial);
+            catalog.AnvilPhysicalPrefab = CreateWorldItemPrefab("P_SmithingAnvilItem", PrimitiveType.Cube, new Vector3(0.28f, 0.16f, 0.22f), catalog.MetalMaterial);
 
             Dictionary<ItemDefId, Sprite> icons = CreateGeneratedIcons();
 
@@ -267,15 +281,21 @@ namespace VRGame.Manifestation.Editor
             catalog.RockHarvestProfile = CreateOrUpdateAsset<HarvestableProfileDefinition>("Quest3Demo_RockHarvest.asset");
             catalog.FishingHarvestProfile = CreateOrUpdateAsset<HarvestableProfileDefinition>("Quest3Demo_FishingCatch.asset");
             catalog.IconProfile = CreateOrUpdateAsset<IconGenerationProfile>("Quest3Demo_IconGenerationProfile.asset");
+            catalog.RubyGemProfile = CreateOrUpdateAsset<GemEnchantmentProfileDefinition>("Quest3Demo_RubyGemEnchant.asset");
+            catalog.SapphireGemProfile = CreateOrUpdateAsset<GemEnchantmentProfileDefinition>("Quest3Demo_SapphireGemEnchant.asset");
+            catalog.AnvilPlacedPrefab = CreateSmithingAnvilPlacedPrefab("P_SmithingAnvilPlaced", catalog.MetalMaterial, catalog.ItemDatabase, catalog.AffixDatabase, catalog.RubyGemProfile, catalog.SapphireGemProfile);
 
             ItemDefinition wood = ConfigureBasicItem(WoodId, "Wood", "Raw lumber used for early framework building.", "Resource > Natural", ItemFlags.Resource | ItemFlags.Material | ItemFlags.CanBeHeld | ItemFlags.CanBeManifested | ItemFlags.CanBeCrafted, catalog.WoodPhysicalPrefab, icons[WoodId]);
             ItemDefinition stone = ConfigureBasicItem(StoneId, "Stone", "Mineable natural stone.", "Resource > Natural", ItemFlags.Resource | ItemFlags.Material | ItemFlags.CanBeHeld | ItemFlags.CanBeManifested | ItemFlags.CanBeCrafted, catalog.StonePhysicalPrefab, icons[StoneId]);
             ItemDefinition copperOre = ConfigureBasicItem(CopperOreId, "Copper Ore", "Early metal ore for tools and wiring.", "Resource > Ore", ItemFlags.Resource | ItemFlags.Material | ItemFlags.CanBeHeld | ItemFlags.CanBeManifested | ItemFlags.CanBeCrafted, catalog.CopperOrePhysicalPrefab, icons[CopperOreId]);
             ItemDefinition fish = ConfigureBasicItem(FishId, "Cave Fish", "Demo fishing catch stack item.", "Resource > Fishing", ItemFlags.Resource | ItemFlags.Material | ItemFlags.CanBeHeld | ItemFlags.CanBeManifested, catalog.FishPhysicalPrefab, icons[FishId]);
+            ItemDefinition rubyGem = ConfigureBasicItem(RubyGemId, "Ruby Gem", "Stackable gem that applies or upgrades fire enchantments at an anvil.", "Resource > Gem > Fire", ItemFlags.Resource | ItemFlags.Material | ItemFlags.CanBeHeld | ItemFlags.CanBeManifested | ItemFlags.CanBeCrafted, catalog.RubyGemPrefab, icons[RubyGemId]);
+            ItemDefinition sapphireGem = ConfigureBasicItem(SapphireGemId, "Sapphire Gem", "Stackable gem that applies or upgrades frost enchantments at an anvil.", "Resource > Gem > Frost", ItemFlags.Resource | ItemFlags.Material | ItemFlags.CanBeHeld | ItemFlags.CanBeManifested | ItemFlags.CanBeCrafted, catalog.SapphireGemPrefab, icons[SapphireGemId]);
 
             ItemDefinition pickaxe = ConfigureToolItem(CopperPickaxeId, "Copper Pickaxe", "Held VR mining tool. It has no durability.", "Equipment > Tool > Mining > Pickaxe", catalog.PickaxePrefab, icons[CopperPickaxeId], HarvestingDomain.Mining, HarvestingSubtype.Pickaxe, 3f, 1, 1.25f);
             ItemDefinition axe = ConfigureToolItem(CopperAxeId, "Copper Axe", "Held VR lumber tool. It has no durability.", "Equipment > Tool > Lumber > Axe", catalog.AxePrefab, icons[CopperAxeId], HarvestingDomain.Lumber, HarvestingSubtype.Axe, 2f, 1, 1.15f);
             ItemDefinition fishingTrap = ConfigureToolItem(FishingTrapId, "Fishing Trap", "Prototype held fishing/trap tool.", "Equipment > Tool > Fishing > Trap", catalog.FishingTrapPrefab, icons[FishingTrapId], HarvestingDomain.Fishing, HarvestingSubtype.Trap, 1f, 1, 1f);
+            ItemDefinition smithingHammer = ConfigureToolItem(SmithingHammerId, "Smithing Hammer", "Held VR forge tool for striking items on an anvil. It has no durability.", "Equipment > Tool > Construction/Architecture > Hammer", catalog.SmithingHammerPrefab, icons[SmithingHammerId], HarvestingDomain.ConstructionArchitecture, HarvestingSubtype.Hammer, 1f, 1, 1f);
             ItemDefinition sword = ConfigureSwordItem(CopperSwordId, "Copper Sword", catalog.SwordPrefab, icons[CopperSwordId]);
             ItemDefinition helmet = ConfigureArmorItem(CopperHelmetId, "Copper Helmet", "Loadout armor with demo modifier and enchantment.", "Equipment > Armor > Head", catalog.HelmetPrefab, icons[CopperHelmetId], EquipmentSlotKind.Head, 2f);
             ItemDefinition ring = ConfigureRingItem(RubyRingId, "Ruby Ring", catalog.RingPrefab, icons[RubyRingId]);
@@ -287,13 +307,21 @@ namespace VRGame.Manifestation.Editor
             ItemDefinition switchItem = ConfigurePlaceableItem(SwitchId, "Switch", "Electrical switch device sample.", "Placeable > Electrical > Switch", catalog.WireSpoolPhysicalPrefab, icons[SwitchId], catalog.SwitchPlacedPrefab, PlacementMode.ElectricalDevice, PlaceableKind.ElectricalDevice, FrameworkPieceKind.None, ItemFlags.Electrical);
             ItemDefinition diode = ConfigurePlaceableItem(DiodeId, "Diode", "Directional electrical device sample.", "Placeable > Electrical > Diode", catalog.WireSpoolPhysicalPrefab, icons[DiodeId], catalog.DiodePlacedPrefab, PlacementMode.ElectricalDevice, PlaceableKind.ElectricalDevice, FrameworkPieceKind.None, ItemFlags.Electrical);
             ItemDefinition wireSpool = ConfigurePlaceableItem(WireSpoolId, "Wire Spool", "Wire stack consumed by the wire tool.", "Placeable > Electrical > Wire", catalog.WireSpoolPhysicalPrefab, icons[WireSpoolId], null, PlacementMode.Wire, PlaceableKind.Wire, FrameworkPieceKind.None, ItemFlags.Electrical);
+            ItemDefinition anvil = ConfigurePlaceableItem(SmithingAnvilId, "Smithing Anvil", "Placeable smithing station for modifier reforging and gem enchantment insertion.", "Placeable > Station > Smithing", catalog.AnvilPhysicalPrefab, icons[SmithingAnvilId], catalog.AnvilPlacedPrefab, PlacementMode.Machine, PlaceableKind.Machine, FrameworkPieceKind.None);
 
             ModifierDefinition sturdy = ConfigureModifier(SturdyModifierId, "Sturdy", "Demo equipment modifier: adds defense.", new[] { new StatModifier(StatIds.Defense, StatModifierOperation.Flat, 2f, SturdyModifierId.Value) });
             ModifierDefinition hardened = ConfigureModifier(HardenedModifierId, "Hardened I", "Demo tool treatment: raises effective material hardness.", new[] { new StatModifier(StatIds.ToolHardness, StatModifierOperation.Flat, 2f, HardenedModifierId.Value) });
+            ModifierDefinition refined = ConfigureModifier(RefinedModifierId, "Refined", "Smithing-only modifier: improves melee handling.", new[] { new StatModifier(StatIds.MeleeDamage, StatModifierOperation.AdditivePercent, 0.12f, RefinedModifierId.Value), new StatModifier(StatIds.MeleeAttackSpeed, StatModifierOperation.AdditivePercent, 0.08f, RefinedModifierId.Value) });
             EnchantmentDefinition ember = ConfigureEnchantment(EmberEnchantmentId, "Ember", "Demo enchantment: adds melee damage scaling.", 3, new[] { new EnchantmentStatEffectData(StatIds.MeleeDamage, StatModifierOperation.AdditivePercent, 0.1f, 0.05f) });
+            EnchantmentDefinition frost = ConfigureEnchantment(FrostEnchantmentId, "Frost", "Demo enchantment: adds melee knockback scaling and conflicts with Ember.", 3, new[] { new EnchantmentStatEffectData(StatIds.MeleeKnockback, StatModifierOperation.AdditivePercent, 0.12f, 0.05f) });
+            ModifierSetDefinition smithingSet = ConfigureModifierSet(SmithingModifierSetId, "Basic Smithing Reforge Pool", "Modifiers available through the demo anvil.", sturdy, hardened, refined);
+            EnchantmentSetDefinition rubySet = ConfigureEnchantmentSet(RubyEnchantmentSetId, "Ruby Fire Gem Pool", "Ruby gems apply or upgrade fire enchantments.", ember);
+            EnchantmentSetDefinition sapphireSet = ConfigureEnchantmentSet(SapphireEnchantmentSetId, "Sapphire Frost Gem Pool", "Sapphire gems apply or upgrade frost enchantments.", frost);
+            ConfigureGemProfile(catalog.RubyGemProfile, "demo.gem_profile.ruby_fire", "Ruby Fire Gem", RubyGemId, RubyEnchantmentSetId);
+            ConfigureGemProfile(catalog.SapphireGemProfile, "demo.gem_profile.sapphire_frost", "Sapphire Frost Gem", SapphireGemId, SapphireEnchantmentSetId);
 
-            SetDatabaseDefinitions(catalog.ItemDatabase, wood, stone, copperOre, fish, pickaxe, axe, fishingTrap, sword, helmet, ring, foundation, wall, chair, generator, switchItem, diode, wireSpool);
-            SetAffixDatabaseDefinitions(catalog.AffixDatabase, new[] { sturdy, hardened }, new[] { ember });
+            SetDatabaseDefinitions(catalog.ItemDatabase, wood, stone, copperOre, fish, rubyGem, sapphireGem, pickaxe, axe, fishingTrap, smithingHammer, sword, helmet, ring, foundation, wall, chair, generator, switchItem, diode, wireSpool, anvil);
+            SetAffixDatabaseDefinitions(catalog.AffixDatabase, new[] { sturdy, hardened, refined }, new[] { ember, frost }, new[] { smithingSet }, new[] { rubySet, sapphireSet });
             ConfigureLoadout(catalog.LoadoutConfig);
             ConfigureHarvestProfile(catalog.TreeHarvestProfile, HarvestingDomain.Lumber, HarvestingSubtype.Axe, 1f, 1, 2f, new HarvestDropEntry(WoodId, StackQuantity.FromLong(5)), "wood", "tree");
             ConfigureHarvestProfile(catalog.RockHarvestProfile, HarvestingDomain.Mining, HarvestingSubtype.Pickaxe, 2f, 1, 2f, new HarvestDropEntry(StoneId, StackQuantity.FromLong(4)), "stone", "ore");
@@ -313,6 +341,9 @@ namespace VRGame.Manifestation.Editor
             catalog.RockHarvestProfile = LoadGeneratedAsset<HarvestableProfileDefinition>("Quest3Demo_RockHarvest.asset");
             catalog.FishingHarvestProfile = LoadGeneratedAsset<HarvestableProfileDefinition>("Quest3Demo_FishingCatch.asset");
             catalog.IconProfile = LoadGeneratedAsset<IconGenerationProfile>("Quest3Demo_IconGenerationProfile.asset");
+            catalog.RubyGemProfile = LoadGeneratedAsset<GemEnchantmentProfileDefinition>("Quest3Demo_RubyGemEnchant.asset");
+            catalog.SapphireGemProfile = LoadGeneratedAsset<GemEnchantmentProfileDefinition>("Quest3Demo_SapphireGemEnchant.asset");
+            catalog.AnvilPlacedPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{PrefabRoot}/P_SmithingAnvilPlaced.prefab");
         }
 
         private static T LoadGeneratedAsset<T>(string fileName) where T : ScriptableObject
@@ -556,10 +587,28 @@ namespace VRGame.Manifestation.Editor
             DebugInventoryStateProvider provider = UnityEngine.Object.FindAnyObjectByType<DebugInventoryStateProvider>();
             wireTool.BindRuntime(registry, catalog.ItemDatabase, provider, WireSpoolId);
 
+            if (catalog.AnvilPlacedPrefab != null)
+            {
+                GameObject anvil = PrefabUtility.InstantiatePrefab(catalog.AnvilPlacedPrefab) as GameObject;
+                anvil.name = "Quest3Demo_SmithingAnvil";
+                anvil.transform.SetParent(root, false);
+                anvil.transform.position = new Vector3(1.8f, 0.25f, -2.15f);
+                anvil.transform.rotation = Quaternion.Euler(0f, -20f, 0f);
+                SmithingStation station = anvil.GetComponent<SmithingStation>();
+                if (station != null)
+                {
+                    AssignSerialized(station,
+                        ("itemDefinitionDatabase", catalog.ItemDatabase),
+                        ("affixDefinitionDatabase", catalog.AffixDatabase),
+                        ("inventoryStateProviderBehaviour", provider));
+                }
+            }
+
             CreateLabel(root, "Inventory / Portal / Equipment", new Vector3(0f, 2.45f, -1.4f));
             CreateLabel(root, "Mining and Lumber", new Vector3(-3.8f, 1.4f, 2.6f));
             CreateLabel(root, "Melee Dummy", new Vector3(3.2f, 2.4f, 0.9f));
             CreateLabel(root, "Framework + Electrical", new Vector3(2.7f, 1.8f, 2.7f));
+            CreateLabel(root, "Smithing / Gems", new Vector3(1.8f, 1.4f, -2.15f));
         }
 
         private static Harvestable CreateTree(Transform root, Vector3 position, DemoAssetCatalog catalog)
@@ -651,19 +700,23 @@ namespace VRGame.Manifestation.Editor
                 new Quest3DemoStackSeed(WoodId, StackQuantity.FromLong(250)),
                 new Quest3DemoStackSeed(StoneId, StackQuantity.FromLong(150)),
                 new Quest3DemoStackSeed(CopperOreId, StackQuantity.FromLong(75)),
+                new Quest3DemoStackSeed(RubyGemId, StackQuantity.FromLong(6)),
+                new Quest3DemoStackSeed(SapphireGemId, StackQuantity.FromLong(6)),
                 new Quest3DemoStackSeed(WoodFoundationId, StackQuantity.FromLong(12)),
                 new Quest3DemoStackSeed(WoodWallId, StackQuantity.FromLong(18)),
                 new Quest3DemoStackSeed(WoodChairId, StackQuantity.FromLong(3)),
                 new Quest3DemoStackSeed(GeneratorId, StackQuantity.FromLong(2)),
                 new Quest3DemoStackSeed(SwitchId, StackQuantity.FromLong(3)),
                 new Quest3DemoStackSeed(DiodeId, StackQuantity.FromLong(3)),
-                new Quest3DemoStackSeed(WireSpoolId, StackQuantity.FromLong(40))
+                new Quest3DemoStackSeed(WireSpoolId, StackQuantity.FromLong(40)),
+                new Quest3DemoStackSeed(SmithingAnvilId, StackQuantity.FromLong(1))
             });
             SetInstanceSeeds(serializedObject.FindProperty("instanceSeeds"), new[]
             {
                 new Quest3DemoInstanceSeed(CopperPickaxeId, ItemInstanceId.FromString("demo.instance.copper_pickaxe"), HardenedModifierId, default, 1, 1101, false, string.Empty),
                 new Quest3DemoInstanceSeed(CopperAxeId, ItemInstanceId.FromString("demo.instance.copper_axe"), default, default, 1, 1102, false, string.Empty),
                 new Quest3DemoInstanceSeed(FishingTrapId, ItemInstanceId.FromString("demo.instance.fishing_trap"), default, default, 1, 1103, false, string.Empty),
+                new Quest3DemoInstanceSeed(SmithingHammerId, ItemInstanceId.FromString("demo.instance.smithing_hammer"), default, default, 1, 1104, false, string.Empty),
                 new Quest3DemoInstanceSeed(CopperSwordId, ItemInstanceId.FromString("demo.instance.copper_sword"), default, EmberEnchantmentId, 1, 1201, false, string.Empty),
                 new Quest3DemoInstanceSeed(CopperHelmetId, ItemInstanceId.FromString("demo.instance.copper_helmet"), SturdyModifierId, EmberEnchantmentId, 1, 1301, true, EquipmentSlotIdUtility.GetDefaultSlotId(EquipmentSlotKind.Head)),
                 new Quest3DemoInstanceSeed(RubyRingId, ItemInstanceId.FromString("demo.instance.ruby_ring"), SturdyModifierId, EmberEnchantmentId, 2, 1302, true, EquipmentSlotIdUtility.GetGeneratedRingSlotId(0))
@@ -691,7 +744,9 @@ namespace VRGame.Manifestation.Editor
             PlayerInventoryState inventoryState = provider.InventoryState;
 
             failures += ExpectTrue("Wood stack seeded", PlayerInventoryOperations.HasStack(inventoryState, WoodId, StackQuantity.One));
+            failures += ExpectTrue("Ruby gem stack seeded", PlayerInventoryOperations.HasStack(inventoryState, RubyGemId, StackQuantity.One));
             failures += ExpectTrue("Copper sword instance seeded", inventoryState.TryGetInstance(ItemInstanceId.FromString("demo.instance.copper_sword"), out _));
+            failures += ExpectTrue("Smithing hammer instance seeded", inventoryState.TryGetInstance(ItemInstanceId.FromString("demo.instance.smithing_hammer"), out _));
             failures += ExpectTrue("Helmet equipped on Head", inventoryState.EquipmentLoadout.TryGetEquippedItem(EquipmentSlotIdUtility.GetDefaultSlotId(EquipmentSlotKind.Head), out _));
 
             ItemManifestationResult woodManifest = manifestationService.ManifestStack(inventoryState, catalog.ItemDatabase, WoodId, "right");
@@ -719,6 +774,41 @@ namespace VRGame.Manifestation.Editor
                 });
                 failures += ExpectTrue("Foundation placement validates", placementValidation != null && placementValidation.Success);
             }
+
+            ReforgeContext smithingContext = SmithingService.CreateManualSmithingContext(
+                "demo.station.smoke_check",
+                1,
+                SmithingHammerId,
+                Array.Empty<ItemDefId>(),
+                2201,
+                0.25f,
+                new[] { new DefinitionIdReference(SmithingModifierSetId, "Smoke-check smithing pool") });
+            failures += ExpectOperation("Smithing reforge copper sword", SmithingService.ApplySmithingReforge(
+                inventoryState,
+                catalog.ItemDatabase,
+                catalog.AffixDatabase,
+                ItemInstanceId.FromString("demo.instance.copper_sword"),
+                smithingContext,
+                out _));
+
+            failures += ExpectOperation("Ruby gem upgrades copper sword enchantment", SmithingService.ApplyGemProfileFromInventoryStack(
+                inventoryState,
+                catalog.ItemDatabase,
+                catalog.AffixDatabase,
+                catalog.RubyGemProfile,
+                ItemInstanceId.FromString("demo.instance.copper_sword"),
+                2202,
+                out _));
+
+            InventoryOperationResult sapphireConflict = SmithingService.ApplyGemProfileFromInventoryStack(
+                inventoryState,
+                catalog.ItemDatabase,
+                catalog.AffixDatabase,
+                catalog.SapphireGemProfile,
+                ItemInstanceId.FromString("demo.instance.copper_sword"),
+                2203,
+                out _);
+            failures += ExpectTrue("Sapphire gem conflict rejected after Ruby/Ember", sapphireConflict != null && !sapphireConflict.Success);
 
             Debug.Log(failures == 0
                 ? "Quest3Demo editor smoke check passed."
@@ -909,6 +999,63 @@ namespace VRGame.Manifestation.Editor
             return definition;
         }
 
+        private static ModifierSetDefinition ConfigureModifierSet(string setId, string displayName, string description, params ModifierDefinition[] modifiers)
+        {
+            ModifierSetDefinition definition = CreateOrUpdateAsset<ModifierSetDefinition>(SafeFileName(setId) + ".asset");
+            SerializedObject so = new SerializedObject(definition);
+            so.FindProperty("modifierSetId").stringValue = setId;
+            so.FindProperty("displayName").stringValue = displayName;
+            so.FindProperty("description").stringValue = description;
+            SerializedProperty list = so.FindProperty("modifiers");
+            list.arraySize = modifiers.Length;
+            for (int i = 0; i < modifiers.Length; i++)
+            {
+                list.GetArrayElementAtIndex(i).objectReferenceValue = modifiers[i];
+            }
+
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(definition);
+            return definition;
+        }
+
+        private static EnchantmentSetDefinition ConfigureEnchantmentSet(string setId, string displayName, string description, params EnchantmentDefinition[] enchantments)
+        {
+            EnchantmentSetDefinition definition = CreateOrUpdateAsset<EnchantmentSetDefinition>(SafeFileName(setId) + ".asset");
+            SerializedObject so = new SerializedObject(definition);
+            so.FindProperty("enchantmentSetId").stringValue = setId;
+            so.FindProperty("displayName").stringValue = displayName;
+            so.FindProperty("description").stringValue = description;
+            SerializedProperty list = so.FindProperty("enchantments");
+            list.arraySize = enchantments.Length;
+            for (int i = 0; i < enchantments.Length; i++)
+            {
+                list.GetArrayElementAtIndex(i).objectReferenceValue = enchantments[i];
+            }
+
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(definition);
+            return definition;
+        }
+
+        private static void ConfigureGemProfile(GemEnchantmentProfileDefinition profile, string profileId, string displayName, ItemDefId gemItemDefId, string enchantmentSetId)
+        {
+            SerializedObject so = new SerializedObject(profile);
+            so.FindProperty("profileId").stringValue = profileId;
+            so.FindProperty("displayName").stringValue = displayName;
+            so.FindProperty("description").stringValue = "Demo gem profile used by SmithingStation to apply or upgrade an enchantment from a data-driven pool.";
+            so.FindProperty("gemItemDefId").FindPropertyRelative("value").stringValue = gemItemDefId.Value;
+            so.FindProperty("consumedQuantity").FindPropertyRelative("value").longValue = 1;
+            so.FindProperty("behavior").enumValueIndex = (int)GemEnchantmentApplyBehavior.ApplyOrUpgrade;
+            so.FindProperty("skillBonus").floatValue = 0f;
+            so.FindProperty("stationBonus").floatValue = 0f;
+            SerializedProperty pool = so.FindProperty("enchantmentPool");
+            pool.arraySize = 1;
+            pool.GetArrayElementAtIndex(0).FindPropertyRelative("id").stringValue = enchantmentSetId;
+            pool.GetArrayElementAtIndex(0).FindPropertyRelative("note").stringValue = "Gem enchantment pool";
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(profile);
+        }
+
         private static void SetIdentity(SerializedObject so, ItemDefId id, string displayName, string description, string categoryPath, ItemFlags flags, GameObject worldPrefab, Sprite icon)
         {
             so.FindProperty("itemDefId").FindPropertyRelative("value").stringValue = id.Value;
@@ -1017,7 +1164,12 @@ namespace VRGame.Manifestation.Editor
             EditorUtility.SetDirty(database);
         }
 
-        private static void SetAffixDatabaseDefinitions(ItemAffixDefinitionDatabase database, ModifierDefinition[] modifiers, EnchantmentDefinition[] enchantments)
+        private static void SetAffixDatabaseDefinitions(
+            ItemAffixDefinitionDatabase database,
+            ModifierDefinition[] modifiers,
+            EnchantmentDefinition[] enchantments,
+            ModifierSetDefinition[] modifierSets = null,
+            EnchantmentSetDefinition[] enchantmentSets = null)
         {
             SerializedObject so = new SerializedObject(database);
             SerializedProperty modifierList = so.FindProperty("modifierDefinitions");
@@ -1032,6 +1184,22 @@ namespace VRGame.Manifestation.Editor
             for (int i = 0; i < enchantments.Length; i++)
             {
                 enchantmentList.GetArrayElementAtIndex(i).objectReferenceValue = enchantments[i];
+            }
+
+            modifierSets ??= Array.Empty<ModifierSetDefinition>();
+            SerializedProperty modifierSetList = so.FindProperty("modifierSets");
+            modifierSetList.arraySize = modifierSets.Length;
+            for (int i = 0; i < modifierSets.Length; i++)
+            {
+                modifierSetList.GetArrayElementAtIndex(i).objectReferenceValue = modifierSets[i];
+            }
+
+            enchantmentSets ??= Array.Empty<EnchantmentSetDefinition>();
+            SerializedProperty enchantmentSetList = so.FindProperty("enchantmentSets");
+            enchantmentSetList.arraySize = enchantmentSets.Length;
+            for (int i = 0; i < enchantmentSets.Length; i++)
+            {
+                enchantmentSetList.GetArrayElementAtIndex(i).objectReferenceValue = enchantmentSets[i];
             }
 
             so.ApplyModifiedPropertiesWithoutUndo();
@@ -1199,6 +1367,84 @@ namespace VRGame.Manifestation.Editor
             return SavePrefab(root, $"{PrefabRoot}/{name}.prefab");
         }
 
+        private static GameObject CreateSmithingAnvilPlacedPrefab(
+            string name,
+            Material material,
+            ItemDefinitionDatabase itemDatabase,
+            ItemAffixDefinitionDatabase affixDatabase,
+            GemEnchantmentProfileDefinition rubyProfile,
+            GemEnchantmentProfileDefinition sapphireProfile)
+        {
+            GameObject root = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            root.name = name;
+            root.transform.localScale = new Vector3(0.9f, 0.45f, 0.55f);
+            root.GetComponent<Renderer>().sharedMaterial = material;
+            root.AddComponent<PlacedObjectIdentity>();
+            SmithingStation station = root.AddComponent<SmithingStation>();
+
+            Transform targetAnchor = new GameObject("TargetItemAnchor").transform;
+            targetAnchor.SetParent(root.transform, false);
+            targetAnchor.localPosition = new Vector3(0f, 0.85f, 0f);
+
+            Transform gemAnchor = new GameObject("GemAnchor").transform;
+            gemAnchor.SetParent(root.transform, false);
+            gemAnchor.localPosition = new Vector3(0.38f, 0.9f, 0f);
+
+            GameObject trigger = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            trigger.name = "SmithingSurfaceTrigger";
+            trigger.transform.SetParent(root.transform, false);
+            trigger.transform.localPosition = new Vector3(0f, 0.75f, 0f);
+            trigger.transform.localScale = new Vector3(1.3f, 0.25f, 1.15f);
+            UnityEngine.Object.DestroyImmediate(trigger.GetComponent<Renderer>());
+            Collider triggerCollider = trigger.GetComponent<Collider>();
+            triggerCollider.isTrigger = true;
+            SmithingStationSurfaceRelay relay = trigger.AddComponent<SmithingStationSurfaceRelay>();
+            relay.Bind(station);
+
+            GameObject sparks = new GameObject("StrikeSparks");
+            sparks.transform.SetParent(root.transform, false);
+            sparks.transform.localPosition = new Vector3(0f, 0.95f, 0f);
+            ParticleSystem particleSystem = sparks.AddComponent<ParticleSystem>();
+            ParticleSystem.MainModule main = particleSystem.main;
+            main.playOnAwake = false;
+            main.duration = 0.2f;
+            main.startLifetime = 0.22f;
+            main.startSpeed = 1.3f;
+            main.maxParticles = 16;
+            ParticleSystem.EmissionModule emission = particleSystem.emission;
+            emission.rateOverTime = 0f;
+            emission.SetBursts(new[] { new ParticleSystem.Burst(0f, 10) });
+
+            SerializedObject so = new SerializedObject(station);
+            so.FindProperty("stationId").stringValue = "demo.station.smithing_anvil";
+            so.FindProperty("itemDefinitionDatabase").objectReferenceValue = itemDatabase;
+            so.FindProperty("affixDefinitionDatabase").objectReferenceValue = affixDatabase;
+            so.FindProperty("smithingSkillLevel").intValue = 1;
+            so.FindProperty("strikesRequiredToForge").intValue = 3;
+            so.FindProperty("minimumStrikeVelocity").floatValue = 1.15f;
+            so.FindProperty("maxQualityStrikeVelocity").floatValue = 5f;
+            so.FindProperty("qualityBonusPerPerfectStrike").floatValue = 0.18f;
+            so.FindProperty("maxAccumulatedQualityBonus").floatValue = 0.65f;
+            so.FindProperty("targetItemAnchor").objectReferenceValue = targetAnchor;
+            so.FindProperty("gemAnchor").objectReferenceValue = gemAnchor;
+            so.FindProperty("strikeSparks").objectReferenceValue = particleSystem;
+            so.FindProperty("verboseLogs").boolValue = true;
+
+            SerializedProperty modifierPool = so.FindProperty("allowedModifierPoolOverride");
+            modifierPool.arraySize = 1;
+            modifierPool.GetArrayElementAtIndex(0).FindPropertyRelative("id").stringValue = SmithingModifierSetId;
+            modifierPool.GetArrayElementAtIndex(0).FindPropertyRelative("note").stringValue = "Smithing station reforge pool";
+
+            SerializedProperty gemProfilesProperty = so.FindProperty("gemProfiles");
+            gemProfilesProperty.arraySize = 2;
+            gemProfilesProperty.GetArrayElementAtIndex(0).objectReferenceValue = rubyProfile;
+            gemProfilesProperty.GetArrayElementAtIndex(1).objectReferenceValue = sapphireProfile;
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(station);
+
+            return SavePrefab(root, $"{PrefabRoot}/{name}.prefab");
+        }
+
         private static ElectricalNode CreateElectricalNode(string name, Transform parent, Vector3 localPosition, ElectricalNodeRole roles, ElectricalNodeKind kind)
         {
             GameObject nodeObject = new GameObject(name);
@@ -1234,9 +1480,12 @@ namespace VRGame.Manifestation.Editor
                 [StoneId] = Color.gray,
                 [CopperOreId] = new Color(0.8f, 0.39f, 0.16f),
                 [FishId] = new Color(0.08f, 0.65f, 0.95f),
+                [RubyGemId] = new Color(0.86f, 0.05f, 0.18f),
+                [SapphireGemId] = new Color(0.08f, 0.28f, 0.9f),
                 [CopperPickaxeId] = new Color(0.85f, 0.45f, 0.18f),
                 [CopperAxeId] = new Color(0.75f, 0.35f, 0.18f),
                 [FishingTrapId] = new Color(0.45f, 0.28f, 0.1f),
+                [SmithingHammerId] = new Color(0.38f, 0.43f, 0.48f),
                 [CopperSwordId] = new Color(0.9f, 0.45f, 0.2f),
                 [CopperHelmetId] = new Color(0.85f, 0.42f, 0.18f),
                 [RubyRingId] = new Color(0.75f, 0.05f, 0.18f),
@@ -1246,7 +1495,8 @@ namespace VRGame.Manifestation.Editor
                 [GeneratorId] = new Color(0.28f, 0.34f, 0.38f),
                 [SwitchId] = new Color(0.22f, 0.42f, 0.48f),
                 [DiodeId] = new Color(0.32f, 0.25f, 0.48f),
-                [WireSpoolId] = new Color(0.16f, 0.16f, 0.16f)
+                [WireSpoolId] = new Color(0.16f, 0.16f, 0.16f),
+                [SmithingAnvilId] = new Color(0.30f, 0.32f, 0.34f)
             };
 
             Dictionary<ItemDefId, Sprite> icons = new Dictionary<ItemDefId, Sprite>();
@@ -1555,14 +1805,18 @@ namespace VRGame.Manifestation.Editor
             public Material GrassMaterial;
             public Material MetalMaterial;
             public Material RubyMaterial;
+            public Material SapphireMaterial;
             public Material PortalMaterial;
             public GameObject WoodPhysicalPrefab;
             public GameObject StonePhysicalPrefab;
             public GameObject CopperOrePhysicalPrefab;
             public GameObject FishPhysicalPrefab;
+            public GameObject RubyGemPrefab;
+            public GameObject SapphireGemPrefab;
             public GameObject PickaxePrefab;
             public GameObject AxePrefab;
             public GameObject FishingTrapPrefab;
+            public GameObject SmithingHammerPrefab;
             public GameObject SwordPrefab;
             public GameObject HelmetPrefab;
             public GameObject RingPrefab;
@@ -1573,6 +1827,8 @@ namespace VRGame.Manifestation.Editor
             public GameObject SwitchPlacedPrefab;
             public GameObject DiodePlacedPrefab;
             public GameObject WireSpoolPhysicalPrefab;
+            public GameObject AnvilPhysicalPrefab;
+            public GameObject AnvilPlacedPrefab;
             public ItemDefinitionDatabase ItemDatabase;
             public ItemAffixDefinitionDatabase AffixDatabase;
             public EquipmentLoadoutConfig LoadoutConfig;
@@ -1580,6 +1836,8 @@ namespace VRGame.Manifestation.Editor
             public HarvestableProfileDefinition RockHarvestProfile;
             public HarvestableProfileDefinition FishingHarvestProfile;
             public IconGenerationProfile IconProfile;
+            public GemEnchantmentProfileDefinition RubyGemProfile;
+            public GemEnchantmentProfileDefinition SapphireGemProfile;
         }
 
         private sealed class QuestSettingsReport
