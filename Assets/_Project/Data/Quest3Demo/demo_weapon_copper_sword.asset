@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8f894146a47b6448bed01bb9c650d2, type: 3}
+  m_Name: demo_weapon_copper_sword
+  m_EditorClassIdentifier: VRGame.Items::VRGame.Items.ItemDefinition
+  itemDefId:
+    value: demo.weapon.copper_sword
+  displayName: Copper Sword
+  description: Held VR melee weapon. Held item state is separate from equipment loadout.
+  categoryPath:
+    segments:
+    - Equipment
+    - Weapon
+    - Melee
+    - True Melee
+  flags: 3078
+  stackPolicy:
+    mode: 0
+    maxStackSize: 1
+  baseStatModifiers: []
+  worldPrefab: {fileID: 8945864468747900740, guid: d710201c7eb18f04e81c5cc88d1fc5b0, type: 3}
+  generatedIcon: {fileID: 0}
+  hasEquipmentProfile: 1
+  equipmentProfile:
+    family: 3
+    canEquipToLoadout: 0
+    canBeHeldAsItem: 1
+    canHaveModifiers: 1
+    canHaveEnchantments: 1
+    socketLimit: 0
+    compatibleSlots: []
+  hasWeaponProfile: 1
+  weaponProfile:
+    family: 1
+    heldItem: 1
+    occupiesEquipmentSlot: 0
+    weaponTags: []
+  hasMeleeWeaponProfile: 1
+  meleeWeaponProfile:
+    baseDamage: 12
+    critChance: 0.08
+    knockback: 2.5
+    swingSpeed: 1
+    trueMelee: 1
+    minimumHitVelocity: 1.2
+    hitCooldownSeconds: 0.28
+    damageZones:
+    - zoneId: blade
+      damageMultiplier: 1
+      minimumHitVelocityOverride: 0
+  hasToolProfile: 0
+  toolProfile:
+    harvestingType: 0
+    toolSubtype: 0
+    baseMaterialHardnessScore: 0
+    toolTier: 0
+    harvestSpeed: 1
+    effectiveMaterialTags: []
+    effectiveCategoryTags: []
+  hasHarvestingProfile: 0
+  harvestingProfile:
+    requiredHarvestingType: 0
+    allowedToolSubtypes: 
+    materialHardnessScore: 0
+    outputItemDefinitions: []
+    harvestableTags: []
+  hasPlaceableProfile: 0
+  placeableProfile:
+    placementMode: 1
+    kind: 0
+    placedPrefab: {fileID: 0}
+    previewPrefab: {fileID: 0}
+    consumedItemQuantity:
+      value: 1
+    footprint: {x: 1, y: 1, z: 1}
+    snapsToGrid: 1
+    surfaceSnapMode: 1
+    requiresFoundation: 0
+    placementLayerId: 
+    placementTags: []
+    frameworkPieceKind: 0
+    snapRules: []
+    validGroundLayers:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    collisionRules:
+      requireNoBlockingOverlap: 1
+      blockingLayers:
+        serializedVersion: 2
+        m_Bits: 4294967295
+      ignoreTriggerColliders: 1
+      boundsCenter: {x: 0, y: 0, z: 0}
+      boundsExtents: {x: 0.5, y: 0.5, z: 0.5}
+      padding: 0.02
+    rotationRules:
+      rotationMode: 2
+      yawSnapDegrees: 90
+      allowManualYawOffset: 1
+    requiredTool:
+      requiresTool: 0
+      requiredHarvestingType: 0
+      requiredToolSubtype: 0
+      requiredToolTier: 0
+  actionPresetReferences: []
+  allowedModifierPoolReferences: []
+  allowedEnchantmentPoolReferences: []

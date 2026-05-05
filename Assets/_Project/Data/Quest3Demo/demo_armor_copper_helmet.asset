@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8f894146a47b6448bed01bb9c650d2, type: 3}
+  m_Name: demo_armor_copper_helmet
+  m_EditorClassIdentifier: VRGame.Items::VRGame.Items.ItemDefinition
+  itemDefId:
+    value: demo.armor.copper_helmet
+  displayName: Copper Helmet
+  description: Loadout armor with demo modifier and enchantment.
+  categoryPath:
+    segments:
+    - Equipment
+    - Armor
+    - Head
+  flags: 15370
+  stackPolicy:
+    mode: 0
+    maxStackSize: 1
+  baseStatModifiers:
+  - statId:
+      value: stat.defense
+    operation: 0
+    value: 2
+    sourceId: demo.armor.copper_helmet
+    order: 0
+  worldPrefab: {fileID: 1752476584525746571, guid: 3cf7b69cdded4d74c8d6e15a84cfbe47, type: 3}
+  generatedIcon: {fileID: 0}
+  hasEquipmentProfile: 1
+  equipmentProfile:
+    family: 1
+    canEquipToLoadout: 1
+    canBeHeldAsItem: 1
+    canHaveModifiers: 1
+    canHaveEnchantments: 1
+    socketLimit: 1
+    compatibleSlots:
+    - slotKind: 0
+      slotId: 
+      indexedSlot: 0
+      minIndex: 0
+      maxIndex: 0
+  hasWeaponProfile: 0
+  weaponProfile:
+    family: 1
+    heldItem: 1
+    occupiesEquipmentSlot: 0
+    weaponTags: []
+  hasMeleeWeaponProfile: 0
+  meleeWeaponProfile:
+    baseDamage: 1
+    critChance: 0
+    knockback: 0
+    swingSpeed: 1
+    trueMelee: 0
+    minimumHitVelocity: 1
+    hitCooldownSeconds: 0.25
+    damageZones: []
+  hasToolProfile: 0
+  toolProfile:
+    harvestingType: 0
+    toolSubtype: 0
+    baseMaterialHardnessScore: 0
+    toolTier: 0
+    harvestSpeed: 1
+    effectiveMaterialTags: []
+    effectiveCategoryTags: []
+  hasHarvestingProfile: 0
+  harvestingProfile:
+    requiredHarvestingType: 0
+    allowedToolSubtypes: 
+    materialHardnessScore: 0
+    outputItemDefinitions: []
+    harvestableTags: []
+  hasPlaceableProfile: 0
+  placeableProfile:
+    placementMode: 1
+    kind: 0
+    placedPrefab: {fileID: 0}
+    previewPrefab: {fileID: 0}
+    consumedItemQuantity:
+      value: 1
+    footprint: {x: 1, y: 1, z: 1}
+    snapsToGrid: 1
+    surfaceSnapMode: 1
+    requiresFoundation: 0
+    placementLayerId: 
+    placementTags: []
+    frameworkPieceKind: 0
+    snapRules: []
+    validGroundLayers:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    collisionRules:
+      requireNoBlockingOverlap: 1
+      blockingLayers:
+        serializedVersion: 2
+        m_Bits: 4294967295
+      ignoreTriggerColliders: 1
+      boundsCenter: {x: 0, y: 0, z: 0}
+      boundsExtents: {x: 0.5, y: 0.5, z: 0.5}
+      padding: 0.02
+    rotationRules:
+      rotationMode: 2
+      yawSnapDegrees: 90
+      allowManualYawOffset: 1
+    requiredTool:
+      requiresTool: 0
+      requiredHarvestingType: 0
+      requiredToolSubtype: 0
+      requiredToolTier: 0
+  actionPresetReferences: []
+  allowedModifierPoolReferences: []
+  allowedEnchantmentPoolReferences: []

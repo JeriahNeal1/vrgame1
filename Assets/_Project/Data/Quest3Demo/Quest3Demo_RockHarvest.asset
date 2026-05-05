@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e0f6671a114ab4b9e341ca0e7feca9, type: 3}
+  m_Name: Quest3Demo_RockHarvest
+  m_EditorClassIdentifier: VRGame.Items::VRGame.Items.HarvestableProfileDefinition
+  profile:
+    requiredHarvestingType: 2
+    requiredToolSubtype: 5
+    requiredMaterialHardnessScore: 2
+    requiredTier: 1
+    baseHarvestTime: 2
+    requiresCorrectToolFlag: 1
+    dropTableReference:
+      id: 
+      note: 
+    simpleDrops:
+    - itemDefId:
+        value: demo.resource.stone
+      quantity:
+        value: 4
+    materialTags:
+    - stone
+    - ore
+    categoryTags: []

@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/OutdoorsScene.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
+  - enabled: 1
+    path: Assets/_Project/Scenes/Quest3DemoScene.unity
+    guid: e9e6011443c3a6a4d8d2df9f0182f7bf
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: a777f734302474e40a52193e02b1aa37, type: 2}
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
